@@ -18,7 +18,7 @@ def users_input(f, user):
             print('Введите числа')
             continue
         x, y = map(int, place)
-        if not (x >= 0 and x < 3 and y >= 0 and y < 3):
+        if not (0 <= x < 3 and 0 <= y < 3):
             print('Вышли из диапазона')
             continue
         if f[x][y] != '-':
