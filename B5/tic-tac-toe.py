@@ -1,3 +1,5 @@
+
+
 def greet():
     logo = """
  _   _        _               _             
@@ -12,7 +14,7 @@ def greet():
 
 def board():
     print()
-    print("\t| 0 | 1 | 2 | ")
+    print("    | 0 | 1 | 2 | ")
     print("  --------------- ")
     for i, row in enumerate(field):
         row_str = f"  {i} | {' | '.join(row)} | "
@@ -63,27 +65,36 @@ def check_win():
     return False
 
 
-greet()
-field = [[" "] * 3 for i in range(3)]
-count = 0
-while True:
-    count += 1
-    board()
-    if count % 2 == 1:
-        print("Ходит крестик!")
+game_on = True
+while game_on:
+    greet()
+    field = [[" "] * 3 for i in range(3)]
+    count = 0
+    while True:
+        count += 1
+        board()
+        if count % 2 == 1:
+            print("Ходит крестик!")
+        else:
+            print("Ходит нолик!")
+
+        x, y = user_turn()
+
+        if count % 2 == 1:
+            field[x][y] = "X"
+        else:
+            field[x][y] = "0"
+
+        if check_win():
+            break
+
+        if count == 9:
+            print("Ничья!")
+            break
+
+    restart = input("Чтобы сыграть ещё, нажмите '1': ")
+    if restart == "1":
+        game_on = True
     else:
-        print("Ходит нолик!")
-
-    x, y = user_turn()
-
-    if count % 2 == 1:
-        field[x][y] = "X"
-    else:
-        field[x][y] = "0"
-
-    if check_win():
-        break
-
-    if count == 9:
-        print("Ничья!")
-        break
+        print("Спасибо за игру!")
+        game_on = False
