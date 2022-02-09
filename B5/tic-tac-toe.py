@@ -1,3 +1,14 @@
+from os import system, name
+
+
+def clear():
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
 
 
 def greet():
@@ -65,10 +76,11 @@ def check_win():
     return False
 
 
+greet()
 game_on = True
 while game_on:
-    greet()
     field = [[" "] * 3 for i in range(3)]
+    print(field)
     count = 0
     while True:
         count += 1
@@ -92,9 +104,9 @@ while game_on:
             print("Ничья!")
             break
 
-    restart = input("Чтобы сыграть ещё, нажмите '1': ")
-    if restart == "1":
-        game_on = True
-    else:
+    restart = input("Чтобы сыграть ещё, нажмите 1: ")
+    if restart != "1":
         print("Спасибо за игру!")
         game_on = False
+
+    clear()
