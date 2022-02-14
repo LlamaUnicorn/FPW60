@@ -10,15 +10,19 @@
 # print(enemies)
 
 x_score = 0
+print(x_score)
 
 
 def x_won():
-	x_score = x_score + 1
+	return x_score + 1
 
 
-while True:
-	global x_score
-	user = input()
-	x_score = x_won()
-	x_score
-	print(x_score)
+x_score = x_won()
+print(x_score)
+
+# while True:
+# 	global x_score
+# 	user = input()
+# 	x_score = x_won()
+# 	x_score
+# 	print(x_score)

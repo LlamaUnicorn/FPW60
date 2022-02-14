@@ -60,7 +60,6 @@ def user_turn():
 
 
 def check_win():
-    global x_score, o_score
     win_cord = (((0, 0), (0, 1), (0, 2)), ((1, 0), (1, 1), (1, 2)), ((2, 0), (2, 1), (2, 2)),
                 ((0, 2), (1, 1), (2, 0)), ((0, 0), (1, 1), (2, 2)), ((0, 0), (1, 0), (2, 0)),
                 ((0, 1), (1, 1), (2, 1)), ((0, 2), (1, 2), (2, 2)))
@@ -70,14 +69,14 @@ def check_win():
             symbols.append(field[c[0]][c[1]])
         if symbols == ["X", "X", "X"]:
             print("Выиграл X!")
-            x_score = x_score + 1
-            print("changed x score", x_score)
-            return True
+            return "x_won"
         if symbols == ["0", "0", "0"]:
             print("Выиграл 0!")
-            o_score += 1
             return True
     return False
+
+def x_won():
+	return x_score + 1
 
 
 greet()
@@ -105,7 +104,9 @@ while game_on:
         else:
             field[x][y] = "0"
 
-        if check_win():
+        if check_win() == "x_won":
+            x_score = x_won()
+            print("returned from check_win", x_score)
             break
 
         if count == 9:
