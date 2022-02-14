@@ -60,7 +60,7 @@ def user_turn():
 
 
 def check_win():
-    global x_score, o_score
+    global o_score
     win_cord = (((0, 0), (0, 1), (0, 2)), ((1, 0), (1, 1), (1, 2)), ((2, 0), (2, 1), (2, 2)),
                 ((0, 2), (1, 1), (2, 0)), ((0, 0), (1, 1), (2, 2)), ((0, 0), (1, 0), (2, 0)),
                 ((0, 1), (1, 1), (2, 1)), ((0, 2), (1, 2), (2, 2)))
@@ -70,13 +70,10 @@ def check_win():
             symbols.append(field[c[0]][c[1]])
         if symbols == ["X", "X", "X"]:
             print("Выиграл X!")
-            x_score = x_score + 1
-            print("changed x score", x_score)
-            return True
+            return "x_won"
         if symbols == ["0", "0", "0"]:
             print("Выиграл 0!")
-            o_score += 1
-            return True
+            return "o_won"
     return False
 
 
@@ -89,7 +86,6 @@ while game_on:
     field = [[" "] * 3 for i in range(3)]
     print(field)
     count = 0
-    score = f"Счёт: Х {x_score} - O {o_score}"
     while True:
         count += 1
         board()
@@ -105,7 +101,14 @@ while game_on:
         else:
             field[x][y] = "0"
 
-        if check_win():
+        result = check_win()
+        if result == "x_won":
+            x_score += 1
+            print(f"Счёт: Х {x_score} - O {o_score}")
+            break
+        elif result == "o_won":
+            o_score += 1
+            print(f"Счёт: Х {x_score} - O {o_score}")
             break
 
         if count == 9:
@@ -113,7 +116,6 @@ while game_on:
             x_score += 1
             o_score += 1
             break
-    print(score)
     restart = input("Чтобы сыграть ещё, нажмите 1: ")
     if restart != "1":
         print("Спасибо за игру!")
