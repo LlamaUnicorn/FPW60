@@ -104,11 +104,11 @@ while game_on:
         result = check_win()
         if result == "x_won":
             x_score += 1
-            print(f"Счёт: Х {x_score} - O {o_score}")
+            print(f"Счёт: Х - {x_score} : {o_score} - O")
             break
         elif result == "o_won":
             o_score += 1
-            print(f"Счёт: Х {x_score} - O {o_score}")
+            print(f"Счёт: Х - {x_score} : {o_score} - O")
             break
 
         if count == 9:
