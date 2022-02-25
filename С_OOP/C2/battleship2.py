@@ -1,10 +1,10 @@
 from random import randint
 
 # TODO: Keep playing after the game is done
-# TODO: Keep score
+# TODO: Keep score. Somewhat works
+# TODO: Print boards side by side
 # TODO: Ask for a name
 # TODO: If name is SkillFactory use cheats and show the enemy board
-# TODO: Print boards side by side
 # TODO: Rename player/user classes to avoid confusion
 # TODO: Add docstrings to classes
 
@@ -196,13 +196,30 @@ class User(Player):
 
 class Game:
     def __init__(self, size=6):
+        self.scoreboard = ''
         self.size = size
         pl = self.random_board()
         co = self.random_board()
-        co.hid = True
+        co.hid = False  # TODO Disable later
 
         self.ai = AI(co, pl)
         self.us = User(pl, co)
+
+        self.us_score = 0
+        self.co_score = 0
+
+    def score(self):
+        self.scoreboard = f'Счёт: Пользователь {self.us_score} - Компьютер {self.co_score}'
+        print(self.scoreboard)
+        return self.scoreboard  # TODO Override default print
+
+    def user_win(self):
+        self.us_score += 1
+        return self.us_score
+
+    def co_win(self):
+        self.co_score += 1
+        return self.co_score
 
     def random_board(self):
         board = None
@@ -230,7 +247,7 @@ class Game:
 
     def greet(self):
         print("-------------------")
-        print("  Приветсвуем вас  ")
+        print("  Приветствуем вас  ")
         print("      в игре       ")
         print("    морской бой    ")
         print("-------------------")
@@ -261,6 +278,8 @@ class Game:
             if self.ai.board.count == 7:
                 print("-" * 20)
                 print("Пользователь выиграл!")
+                us_win = self.us_score
+                self.score()
                 break
 
             if self.us.board.count == 7:
@@ -275,4 +294,11 @@ class Game:
 
 
 g = Game()
-g.start()
+# g.start()
+g.user_win()
+g.user_win()
+g.co_win()
+print(g.us_score)
+print(g.co_score)
+g.score()
+
