@@ -1,7 +1,10 @@
 from random import randint
 
+
 # TODO: Keep playing after the game is done
-# TODO: Keep score. Somewhat works
+# DONE: Restart works
+# TODO: Rebuild the boards
+# DONE: Keep score
 # TODO: Print boards side by side
 # TODO: Ask for a name
 # TODO: If name is SkillFactory use cheats and show the enemy board
@@ -198,28 +201,40 @@ class Game:
     def __init__(self, size=6):
         self.scoreboard = ''
         self.size = size
-        pl = self.random_board()
-        co = self.random_board()
-        co.hid = False  # TODO Disable later
+        ai = self.random_board()
+        us = self.random_board()
+        ai.hid = False  # TODO Disable later
 
-        self.ai = AI(co, pl)
-        self.us = User(pl, co)
+        self.ai = AI(ai, us)
+        self.us = User(us, ai)
 
+        self.ai_score = 0
         self.us_score = 0
-        self.co_score = 0
 
     def score(self):
-        self.scoreboard = f'Счёт: Пользователь {self.us_score} - Компьютер {self.co_score}'
+        self.scoreboard = f'Счёт: Пользователь {self.us_score} - Компьютер {self.ai_score}'
         print(self.scoreboard)
-        return self.scoreboard  # TODO Override default print
+        return None
 
-    def user_win(self):
+    # TODO fix the line pointers
+    # Вопрос менторам: счёт лучше выводить через score() (211 строка) или через переопределение (строка 217)?
+    # Скорее всего оба варианта ужасны, в этом случае, как лучше сделать отображение счёта?
+
+    def __repr__(self):
+        return f"Через переопределение {self.scoreboard}"
+
+    def us_win(self):
         self.us_score += 1
         return self.us_score
 
-    def co_win(self):
-        self.co_score += 1
-        return self.co_score
+    def ai_win(self):
+        self.ai_score += 1
+        return self.ai_score
+
+    def replay(self):
+        go_on = input("Wanna go another round? Type 1 :")
+        if go_on == "1":
+            self.loop()
 
     def random_board(self):
         board = None
@@ -228,7 +243,7 @@ class Game:
         return board
 
     def random_place(self):
-        lens = [3, 2, 2, 1, 1, 1, 1]
+        lens = [1, 1, 1, 1, 1, 1, 1] #  TODO return the:  lens = [3, 2, 2, 1, 1, 1, 1]
         board = Board(size=self.size)
         attempts = 0
         for l in lens:
@@ -278,13 +293,15 @@ class Game:
             if self.ai.board.count == 7:
                 print("-" * 20)
                 print("Пользователь выиграл!")
-                us_win = self.us_score
-                self.score()
+                self.us_win()
+                self.replay()
                 break
 
             if self.us.board.count == 7:
                 print("-" * 20)
                 print("Компьютер выиграл!")
+                self.ai_win()
+                self.replay()
                 break
             num += 1
 
@@ -294,11 +311,11 @@ class Game:
 
 
 g = Game()
-# g.start()
-g.user_win()
-g.user_win()
-g.co_win()
+g.start()
+# g.user_win()
+# g.user_win()
+# g.co_win()
 print(g.us_score)
-print(g.co_score)
+print(g.ai_score)
 g.score()
-
+print(g)
