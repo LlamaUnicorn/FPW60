@@ -232,9 +232,11 @@ class Game:
         return self.ai_score
 
     def replay(self):
-        go_on = input("Wanna go another round? Type 1 :")
+        go_on = input("Для продолжениея нажмите 1: ")
         if go_on == "1":
             self.loop()
+            # TODO What happens if input is not '1'?
+
 
     def random_board(self):
         board = None
