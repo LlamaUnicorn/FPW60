@@ -82,6 +82,18 @@ class Board:
         self.busy = []
         self.ships = []
 
+    def new_board(self, hid=False, size=6):
+        self.size = size
+        self.hid = hid
+
+        self.count = 0
+
+        self.field = [["O"] * size for _ in range(size)]
+
+        self.busy = []
+        self.ships = []
+
+
     def add_ship(self, ship):
 
         for d in ship.dots:
@@ -211,6 +223,20 @@ class Game:
         self.ai_score = 0
         self.us_score = 0
 
+    def new_game(self, size=6):
+        self.scoreboard = ''
+        self.size = size
+        ai = self.random_board()
+        us = self.random_board()
+        ai.hid = False  # TODO Disable later
+
+        self.ai = AI(ai, us)
+        self.us = User(us, ai)
+
+        self.ai_score = 0
+        self.us_score = 0
+
+
     def score(self):
         self.scoreboard = f'Счёт: Пользователь {self.us_score} - Компьютер {self.ai_score}'
         print(self.scoreboard)
@@ -234,9 +260,9 @@ class Game:
     def replay(self):
         go_on = input("Для продолжениея нажмите 1: ")
         if go_on == "1":
+            Board.new_board()
             self.loop()
             # TODO What happens if input is not '1'?
-
 
     def random_board(self):
         board = None
