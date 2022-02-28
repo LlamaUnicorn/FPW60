@@ -1,9 +1,10 @@
 from random import randint
 
 
-# TODO: Keep playing after the game is done
+# DONE: Keep playing after the game is done
 # DONE: Restart works
-# TODO: Rebuild the boards
+# DONE: Rebuild the boards
+# DONE: Show Score
 # DONE: Keep score
 # TODO: Print boards side by side
 # TODO: Ask for a name
@@ -233,8 +234,8 @@ class Game:
         self.ai = AI(ai, us)
         self.us = User(us, ai)
 
-        self.ai_score = 0
-        self.us_score = 0
+        # self.ai_score = 0
+        # self.us_score = 0
 
 
     def score(self):
@@ -261,6 +262,7 @@ class Game:
         go_on = input("Для продолжениея нажмите 1: ")
         if go_on == "1":
             Board.new_board(self)
+            Game.new_game(self, 6)
             self.loop()
             # TODO What happens if input is not '1'?
 
@@ -322,6 +324,7 @@ class Game:
                 print("-" * 20)
                 print("Пользователь выиграл!")
                 self.us_win()
+                self.score()
                 self.replay()
                 break
 
@@ -329,6 +332,7 @@ class Game:
                 print("-" * 20)
                 print("Компьютер выиграл!")
                 self.ai_win()
+                self.score()
                 self.replay()
                 break
             num += 1
