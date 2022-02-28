@@ -260,7 +260,7 @@ class Game:
     def replay(self):
         go_on = input("Для продолжениея нажмите 1: ")
         if go_on == "1":
-            Board.new_board()
+            Board.new_board(self)
             self.loop()
             # TODO What happens if input is not '1'?
 
