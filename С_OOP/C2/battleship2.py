@@ -1,9 +1,10 @@
 from random import randint
 
 
-# TODO: Keep playing after the game is done
+# DONE: Keep playing after the game is done
 # DONE: Restart works
-# TODO: Rebuild the boards
+# DONE: Rebuild the boards
+# DONE: Show Score
 # DONE: Keep score
 # TODO: Print boards side by side
 # TODO: Ask for a name
@@ -82,17 +83,17 @@ class Board:
         self.busy = []
         self.ships = []
 
-    def new_board(self, hid=False, size=6):
-        self.size = size
-        self.hid = hid
-
-        self.count = 0
-
-        self.field = [["O"] * size for _ in range(size)]
-
-        self.busy = []
-        self.ships = []
-
+    def new_board(self):  # , hid=False, size=6): # TODO Cleanup comments
+        self.__init__()
+        # self.size = size
+        # self.hid = hid
+        #
+        # self.count = 0
+        #
+        # self.field = [["O"] * size for _ in range(size)]
+        #
+        # self.busy = []
+        # self.ships = []
 
     def add_ship(self, ship):
 
@@ -223,6 +224,8 @@ class Game:
         self.ai_score = 0
         self.us_score = 0
 
+# TODO Print boards side by side
+# TODO Find a way to call __init__ in new_game and pass previous score as an argument
     def new_game(self, size=6):
         self.scoreboard = ''
         self.size = size
@@ -233,8 +236,8 @@ class Game:
         self.ai = AI(ai, us)
         self.us = User(us, ai)
 
-        self.ai_score = 0
-        self.us_score = 0
+        # self.ai_score = 0
+        # self.us_score = 0
 
 
     def score(self):
@@ -258,9 +261,10 @@ class Game:
         return self.ai_score
 
     def replay(self):
-        go_on = input("Для продолжениея нажмите 1: ")
+        go_on = input("Для продолжения нажмите 1: ")
         if go_on == "1":
-            Board.new_board()
+            Board.new_board(self)
+            Game.new_game(self, 6)
             self.loop()
             # TODO What happens if input is not '1'?
 
@@ -322,6 +326,7 @@ class Game:
                 print("-" * 20)
                 print("Пользователь выиграл!")
                 self.us_win()
+                self.score()
                 self.replay()
                 break
 
@@ -329,6 +334,7 @@ class Game:
                 print("-" * 20)
                 print("Компьютер выиграл!")
                 self.ai_win()
+                self.score()
                 self.replay()
                 break
             num += 1
