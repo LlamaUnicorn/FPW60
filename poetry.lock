@@ -102,6 +102,22 @@ python-versions = ">=3.6"
 diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
+name = "pytelegrambotapi"
+version = "4.4.0"
+description = "Python Telegram bot api."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+requests = "*"
+
+[package.extras]
+PIL = ["pillow"]
+json = ["ujson"]
+redis = ["redis (>=3.4.1)"]
+
+[[package]]
 name = "redis"
 version = "4.1.4"
 description = "Python client for Redis database and key-value store"
@@ -178,7 +194,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "d0069a7912c665c654c7c8a7089f0bada66c9764055c0957217577f9f08d15eb"
+content-hash = "bf645bf9b8e2ffead7ee7dbc0a5bc5dac97187f907abf2c3b353336cc5b38c16"
 
 [metadata.files]
 beautifulsoup4 = [
@@ -274,6 +290,9 @@ packaging = [
 pyparsing = [
     {file = "pyparsing-3.0.7-py3-none-any.whl", hash = "sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484"},
     {file = "pyparsing-3.0.7.tar.gz", hash = "sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea"},
+]
+pytelegrambotapi = [
+    {file = "pyTelegramBotAPI-4.4.0.tar.gz", hash = "sha256:e6f22356abebffe0a893dcf72fe09a0c8bdedad6f498c55a30c3dd32ce488e6a"},
 ]
 redis = [
     {file = "redis-4.1.4-py3-none-any.whl", hash = "sha256:04629f8e42be942c4f7d1812f2094568f04c612865ad19ad3ace3005da70631a"},

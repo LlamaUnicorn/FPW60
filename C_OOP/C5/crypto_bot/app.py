@@ -7,24 +7,25 @@
 # cryptocompare.com / API / Get your free api key /free personal / Register account
 # visit API/Documentation page
 import json
-
+# import pytelegrambotapi
 import requests
 import telebot
 
-TOKEN = ''
+TOKEN = '5169419362:AAGHzlLgAbzZQxIK6zzG8SJV_Hls8VJwM_Y'
 
 bot = telebot.TeleBot(TOKEN)
 
 keys = {
     'биткоин': 'BTC',
     'эфириум': 'ETH',
-    'доллар': 'USD'
+    'доллар': 'USD',
 }
 
 
-@bot.message_handler()
-def echo_test(message: telebot.types.Message):
-    bot.send_message(message.chat.id, 'hello')
+# @bot.message_handler()
+# def echo_test(message: telebot.types.Message):
+#     bot.send_message(message.chat.id, 'hello')
+
 
 
 @bot.message_handler(commands=['start', 'help'])
@@ -39,7 +40,7 @@ def help(message: telebot.types.Message):
 def values(message: telebot.types.Message):
     text = 'Доступные валюты:'
     for key in keys.keys():
-        '\n'.join((text, key, ))
+        text = '\n'.join((text, key, ))
     bot.reply_to(message, text)
 
 

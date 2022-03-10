@@ -1,2 +1,2 @@
 language = "python3"
-run = "python C_OOP/C5/5.4b_beatiful_soup4.py"
+run = "python C_OOP/C5/crypto_bot/app.py"
