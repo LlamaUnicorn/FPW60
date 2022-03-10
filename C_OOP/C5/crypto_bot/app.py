@@ -11,7 +11,8 @@ import json
 import requests
 import telebot
 
-TOKEN = '5169419362:AAGHzlLgAbzZQxIK6zzG8SJV_Hls8VJwM_Y'
+TOKEN = ''
+WEATHER_TOKEN=''
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -52,5 +53,6 @@ def convert (message: telebot.types.Message):
     text = f'Цена {amount} {quote} в {base} - {total_base}'
     bot.send_message(message.chat.id, text)
 
+# Add weather
 
 bot.polling()
