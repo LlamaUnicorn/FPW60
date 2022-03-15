@@ -31,6 +31,10 @@
 # TODO: Добавить погоду
 # TODO: реализовать асинхронщину, чтобы программа не падала, не дождавшись ответа
 
+# https://exchangerate.host/#/#articles 
+# amount	[optional] The amount to be converted.
+# example:amount=1200
+
 import telebot
 from config import keys, TOKEN
 from utils import ConvertionException, CryptoConverter
