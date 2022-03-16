@@ -25,7 +25,7 @@
 # TODO: Токен Telegram-бота хранить в специальном конфиге (можно использовать .py файл).
 # TODO: Все классы спрятать в файле extensions.py.
 
-# TODO: Перевести пользовательский ввод в lowercase
+# DONE: Перевести пользовательский ввод в lowercase
 # TODO: Найти падежи в практикуме
 # TODO: Добавить правильные падежи в ответы: 25 доллар_ов = 2566 рублей
 # TODO: Добавить погоду
@@ -67,6 +67,8 @@ def convert(message: telebot.types.Message):
             raise ConvertionException('Введите 3 параметра.')
 
         quote, base, amount = values
+        quote = quote.lower()
+        base = base.lower()
         total_base = CryptoConverter.convert(quote, base, amount)
     except ConvertionException as e:
         bot.reply_to(message, f'Ошибка пользователя. \n{e}')
