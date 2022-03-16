@@ -31,8 +31,9 @@ class CryptoConverter:
         # r = requests.get(f'https://min-api.cryptocompare.com/data/price?fsym={quote_ticker}&tsyms={base_ticker}')
         r = requests.get(f'https://api.exchangerate.host/convert?from={quote_ticker}&to={base_ticker}&amount={amount}')
         # total_base = json.loads(r.content)[keys[base]]
-        total_base = r.json()
-
+        # total_base = r.json()
+        total_base = json.loads(r.content)['result']
+        total_base = round(total_base, 2)
         return total_base
 
 

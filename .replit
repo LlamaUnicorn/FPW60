@@ -1,2 +1,2 @@
 language = "python3"
-run = "python C_OOP/C5/crypto_bot/app.py"
+run = "python C_OOP/C5/Conversion_bot/app.py"

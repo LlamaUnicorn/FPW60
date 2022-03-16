@@ -1,9 +1,7 @@
-TOKEN = ''
+TOKEN = '5169419362:AAF9HLZqhY-09xoAAXFMr0nC5Z24WPhG45E'
 WEATHER_TOKEN=''
 
 keys = {
-    'биткоин': 'BTC',
-    'эфириум': 'ETH',
     'доллар': 'USD',
     'евро': 'EUR',
     'рубль': 'RUB'
