@@ -11,12 +11,12 @@
 
 # TODO: При написании бота необходимо использовать библиотеку pytelegrambotapi.
 # TODO: При ошибке пользователя (например, введена неправильная или несуществующая валюта или неправильно введено число) вызывать собственно написанное исключение APIException с текстом пояснения ошибки.
-# TODO: Для отправки запросов к API описать класс со статическим методом get_price(), который принимает три аргумента и возвращает нужную сумму в валюте:
+# DONE: Для отправки запросов к API описать класс со статическим методом get_price(), который принимает три аргумента и возвращает нужную сумму в валюте:
 # TODO: Токен Telegram-бота хранить в специальном конфиге (можно использовать .py файл).
-# TODO: Все классы спрятать в файле extensions.py.
+# DONE: Все классы спрятать в файле extensions.py.
 # TODO: Найти падежи в практикуме
 # TODO: Добавить правильные падежи в ответы: 25 доллар_ов = 2566 рублей
-# TODO: Добавить погоду
+# TODO: Добавить погоду. Как передать аргумент города в вызов функции?
 # TODO: реализовать асинхронщину, чтобы программа не падала, не дождавшись ответа
 
 # DONE: Бот возвращает цену на определённое количество валюты (евро, доллар или рубль).
@@ -36,8 +36,8 @@
 # example:amount=1200
 
 import telebot
-from config import keys, TOKEN
-from utils import ConvertionException, CryptoConverter
+from config import keys, TOKEN, WEATHER_TOKEN
+from extensions import ConversionException, CurrencyConverter, GetWeather
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -58,27 +58,34 @@ def values(message: telebot.types.Message):
     bot.reply_to(message, text)
 
 
+@bot.message_handler(commands=['weather', 'погода'])
+def weather(message: telebot.types.Message):
+    text = 'Погода скоро будет'
+    get_weather = GetWeather('Moscow')
+    result = get_weather.get_coordinates()
+    print(result)
+    bot.reply_to(message, result)
+
+
 @bot.message_handler(content_types=['text', ])
 def convert(message: telebot.types.Message):
     try:
         values = message.text.split(' ')
 
         if len(values) != 3:
-            raise ConvertionException('Введите 3 параметра.')
+            raise ConversionException('Введите 3 параметра.')
 
         quote, base, amount = values
         quote = quote.lower()
         base = base.lower()
-        total_base = CryptoConverter.convert(quote, base, amount)
-    except ConvertionException as e:
+        total_base = CurrencyConverter.get_price(quote, base, amount)
+    except ConversionException as e:
         bot.reply_to(message, f'Ошибка пользователя. \n{e}')
     except Exception as e:
         bot.reply_to(message, f'Не удалось обработать команду\n{e}')
     else:
         text = f'Цена {amount} {quote} в {base} - {total_base}'
         bot.send_message(message.chat.id, text)
-
-# Add weather
 
 
 bot.polling()
