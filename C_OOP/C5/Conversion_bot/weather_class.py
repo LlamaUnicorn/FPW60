@@ -41,14 +41,16 @@ class GetWeather:
         print(weather_report)
         return weather_report
 
+    @staticmethod
     def run(self):
         # g.location = input('city: ')
-        g.get_coordinates()
+        self.get_coordinates()
 
 
-g = GetWeather('Moscow')
-g.get_coordinates()
+# g = GetWeather('Москва')
+# # g.get_coordinates()
 # g.run()
+
 
 # ------------------------------------------------
 # works with classes. can't pass input into bot

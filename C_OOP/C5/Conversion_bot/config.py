@@ -1,7 +1,7 @@
 TOKEN = ''
-WEATHER_TOKEN=''
+WEATHER_TOKEN = ''
 
-keys = {
+currency = {
     'доллар': 'USD',
     'евро': 'EUR',
     'рубль': 'RUB'

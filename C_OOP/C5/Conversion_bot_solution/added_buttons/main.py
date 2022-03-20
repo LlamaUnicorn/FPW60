@@ -9,7 +9,7 @@ import traceback
 def create_markup(base=None):
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     buttons = []
-    for val in exchanges.keys():
+    for val in exchanges.currency():
         if val != base:
             buttons.append(types.KeyboardButton(val.capitalize()))
 
@@ -29,7 +29,7 @@ def start(message: telebot.types.Message):
 @bot.message_handler(commands=['values'])
 def values(message: telebot.types.Message):
     text = 'Доступные валюты:'
-    for i in exchanges.keys():
+    for i in exchanges.currency():
         text = '\n'.join((text, i))
     bot.send_message(message.chat.id, text)
 
