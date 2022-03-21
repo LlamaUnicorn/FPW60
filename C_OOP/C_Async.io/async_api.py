@@ -8,6 +8,7 @@ t_0 = time.time()
 async def day_rate(session, day):
     async with session.get(f"https://api.exchangeratesapi.io/2020-10-{day}?symbols=RUB") as resp:
         r = await resp.json()
+        print(r)
         return r["rates"]["RUB"]
 
 
