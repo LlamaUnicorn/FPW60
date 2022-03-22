@@ -34,6 +34,9 @@ class CurrencyConverter:
         message = total_base
         return message
 
+#  Сначала реализовал функционал получения прогноза погоды в виде класса. Позже переделаю (надеюсь).
+#  Попробуйте вместо названия города ввести цифру.
+
 
 class GetWeather:
     def __init__(self, city):
@@ -69,5 +72,4 @@ class GetWeather:
 
     @staticmethod
     def run(self):
-        # g.location = input('city: ')
         self.get_coordinates()

@@ -1,5 +1,6 @@
-TOKEN = ''
-WEATHER_TOKEN = ''
+TOKEN = ''  # чтобы другие боты не парсили токены с гита,
+# вставьте отсюда:
+WEATHER_TOKEN = ''  #
 
 currency = {
     'доллар': 'USD',
